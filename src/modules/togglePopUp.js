@@ -1,8 +1,9 @@
 const togglePopUp = () => {
   const callBtnMain = document.querySelectorAll('.call-btn__main'),
     popupCall = document.querySelector('.popup-call'),
+    popupDiscount = document.querySelector('.popup-discount'),
     popupCheck = document.querySelector('.popup-check'),
-    popupContentCall = document.querySelector('.popup-call .popup-content');
+    sentenceSection = document.querySelector('.sentence');
 
   const animatePopUp = elem => {
 
@@ -25,30 +26,52 @@ const togglePopUp = () => {
 
   };
 
-  callBtnMain.forEach(elem => {
-    elem.addEventListener('click', event => {
-      popupCall.style.display = 'block';
-      if (window.screen.width >= 768) {
-        event.preventDefault();
-        popupContentCall.style.left = 0;
-        animatePopUp(popupContentCall);
-      }
-    });
-  });
+  const showPopUp = elem => {
+    elem.style.display = 'block';
+    const elemContent = elem.querySelector('.popup-content');
+    if (window.screen.width >= 768) {
+      elemContent.style.left = 0;
+      animatePopUp(elemContent);
+    }
+  };
 
-  popupCall.addEventListener('click', event => {
+  const hidePopUp = (elem, event) => {
     event.preventDefault();
     let target = event.target;
 
     if (target.classList.contains('popup-close')) {
-      popupCall.style.display = 'none';
+      elem.style.display = 'none';
     } else {
       target = target.closest('.popup-content');
 
       if (!target) {
-        popupCall.style.display = 'none';
+        elem.style.display = 'none';
       }
     }
+  };
+
+  callBtnMain.forEach(elem => {
+    elem.addEventListener('click', event => {
+      event.preventDefault();
+      showPopUp(popupCall);
+    });
+  });
+
+  popupCall.addEventListener('click', event => {
+    hidePopUp(popupCall, event);
+  });
+
+  sentenceSection.addEventListener('click', event => {
+    event.preventDefault();
+    const target = event.target;
+
+    if (target.classList.contains('sentence-btn')) {
+      showPopUp(popupDiscount);
+    }
+  });
+
+  popupDiscount.addEventListener('click', event => {
+    hidePopUp(popupDiscount, event);
   });
 };
 
