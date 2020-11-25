@@ -19,7 +19,22 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_showProducts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/showProducts */ \"./src/modules/showProducts.js\");\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n\n //PopUp\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_1__.default)(); //showProducts\n\n(0,_modules_showProducts__WEBPACK_IMPORTED_MODULE_0__.default)();\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_showProducts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/showProducts */ \"./src/modules/showProducts.js\");\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/accordion */ \"./src/modules/accordion.js\");\n\n\n //PopUp\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_1__.default)(); //showProducts\n\n(0,_modules_showProducts__WEBPACK_IMPORTED_MODULE_0__.default)(); //Accordion\n\n(0,_modules_accordion__WEBPACK_IMPORTED_MODULE_2__.default)();\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/accordion.js":
+/*!**********************************!*\
+  !*** ./src/modules/accordion.js ***!
+  \**********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar accordion = function accordion() {\n  var questions = document.querySelector('.questions'),\n      questionPanels = document.querySelectorAll('.questions .panel'),\n      panelCollapse = document.querySelectorAll('.questions .panel-collapse');\n\n  var togglePanels = function togglePanels(index) {\n    for (var i = 0; i < questionPanels.length; i++) {\n      if (index === i) {\n        panelCollapse[i].classList.add('in');\n      } else {\n        panelCollapse[i].classList.remove('in');\n      }\n    }\n  };\n\n  questions.addEventListener('click', function (event) {\n    event.preventDefault();\n    var target = event.target;\n    target = target.closest('.panel');\n\n    if (target) {\n      questionPanels.forEach(function (item, i) {\n        if (item === target) {\n          togglePanels(i);\n        }\n      });\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordion);\n\n//# sourceURL=webpack://diplomjs/./src/modules/accordion.js?");
 
 /***/ }),
 
@@ -1171,7 +1186,7 @@ eval("var $iterators = __webpack_require__(/*! ./es6.array.iterator */ \"./node_
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "83607bc171400d5aac43"
+/******/ 		__webpack_require__.h = () => "06f7b72571fa1be3ed5a"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
