@@ -1,5 +1,6 @@
 const togglePopUp = () => {
   const callBtnMain = document.querySelectorAll('.call-btn__main'),
+    gaugingButton = document.querySelector('.gauging-button'),
     popupCall = document.querySelector('.popup-call'),
     popupDiscount = document.querySelector('.popup-discount'),
     popupCheck = document.querySelector('.popup-check'),
@@ -72,6 +73,15 @@ const togglePopUp = () => {
 
   popupDiscount.addEventListener('click', event => {
     hidePopUp(popupDiscount, event);
+  });
+
+  gaugingButton.addEventListener('click', event => {
+    event.preventDefault();
+    showPopUp(popupCheck);
+  });
+
+  popupCheck.addEventListener('click', event => {
+    hidePopUp(popupCheck, event);
   });
 };
 
