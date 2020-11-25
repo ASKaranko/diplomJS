@@ -7,17 +7,33 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements:  */
-/***/ (() => {
+/*! namespace exports */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/togglePopUp */ \"./src/modules/togglePopUp.js\");\n //PopUp\n\n(0,_modules_togglePopUp__WEBPACK_IMPORTED_MODULE_0__.default)();\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/togglePopUp.js":
+/*!************************************!*\
+  !*** ./src/modules/togglePopUp.js ***!
+  \************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar togglePopUp = function togglePopUp() {\n  var callBtnMain = document.querySelectorAll('.call-btn__main'),\n      popupCall = document.querySelector('.popup-call'),\n      popupContentCall = document.querySelector('.popup-call .popup-content');\n\n  var animatePopUp = function animatePopUp(elem) {\n    function draw(timePassed) {\n      elem.style.left = timePassed / 25 + '%';\n    }\n\n    var start = Date.now();\n    var timer = setInterval(function () {\n      var timePassed = Date.now() - start;\n\n      if (timePassed > 1250) {\n        clearInterval(timer);\n        return;\n      }\n\n      draw(timePassed);\n    }, 10);\n  };\n\n  callBtnMain.forEach(function (elem) {\n    elem.addEventListener('click', function () {\n      popupCall.style.display = 'block';\n\n      if (window.screen.width >= 768) {\n        popupContentCall.style.left = 0;\n        animatePopUp(popupContentCall);\n      }\n    });\n  });\n  popupCall.addEventListener('click', function (event) {\n    var target = event.target;\n\n    if (target.classList.contains('popup-close')) {\n      popupCall.style.display = 'none';\n    } else {\n      target = target.closest('.popup-content');\n\n      if (!target) {\n        popupCall.style.display = 'none';\n      }\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopUp);\n\n//# sourceURL=webpack://diplomjs/./src/modules/togglePopUp.js?");
 
 /***/ })
 
@@ -59,6 +75,18 @@ eval("\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
 /******/ 	__webpack_require__.i = [];
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/get javascript update chunk filename */
 /******/ 	(() => {
 /******/ 		// This function allow to reference all chunks
@@ -75,7 +103,7 @@ eval("\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "2df5c9c565e6956c4081"
+/******/ 		__webpack_require__.h = () => "ec98938c31c8d357cf25"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -138,6 +166,17 @@ eval("\n\n//# sourceURL=webpack://diplomjs/./src/index.js?");
 /******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
 /******/ 			script.onload = onScriptComplete.bind(null, script.onload);
 /******/ 			needAttach && document.head.appendChild(script);
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
 /******/ 	
