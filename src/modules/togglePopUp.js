@@ -25,9 +25,10 @@ const togglePopUp = () => {
   };
 
   callBtnMain.forEach(elem => {
-    elem.addEventListener('click', () => {
+    elem.addEventListener('click', (event) => {
       popupCall.style.display = 'block';
       if (window.screen.width >= 768) {
+        event.preventDefault();
         popupContentCall.style.left = 0;
         animatePopUp(popupContentCall);
       }
