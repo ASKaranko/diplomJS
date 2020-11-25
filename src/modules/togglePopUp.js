@@ -1,6 +1,7 @@
 const togglePopUp = () => {
   const callBtnMain = document.querySelectorAll('.call-btn__main'),
     popupCall = document.querySelector('.popup-call'),
+    popupCheck = document.querySelector('.popup-check'),
     popupContentCall = document.querySelector('.popup-call .popup-content');
 
   const animatePopUp = elem => {
