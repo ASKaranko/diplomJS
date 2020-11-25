@@ -25,7 +25,7 @@ const togglePopUp = () => {
   };
 
   callBtnMain.forEach(elem => {
-    elem.addEventListener('click', (event) => {
+    elem.addEventListener('click', event => {
       popupCall.style.display = 'block';
       if (window.screen.width >= 768) {
         event.preventDefault();
@@ -36,6 +36,7 @@ const togglePopUp = () => {
   });
 
   popupCall.addEventListener('click', event => {
+    event.preventDefault();
     let target = event.target;
 
     if (target.classList.contains('popup-close')) {
