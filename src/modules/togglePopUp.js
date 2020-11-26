@@ -1,3 +1,5 @@
+import sendObj from './sendObj';
+
 const togglePopUp = () => {
   const callBtnMain = document.querySelectorAll('.call-btn__main'),
     gaugingButton = document.querySelector('.gauging-button'),
@@ -5,7 +7,18 @@ const togglePopUp = () => {
     popupDiscount = document.querySelector('.popup-discount'),
     popupCheck = document.querySelector('.popup-check'),
     sentenceSection = document.querySelector('.sentence'),
-    constructor = document.querySelector('.constructor');
+    constructor = document.querySelector('.constructor'),
+    popupConsultation = document.querySelector('.popup-consultation'),
+    director = document.querySelector('.director'),
+    userName = document.getElementById('name_13'),
+    phoneUser = document.getElementById('phone_13'),
+    inputMessage = director.querySelector('input');
+
+  const dataObj = {
+    question: '',
+    userName: '',
+    phoneUser: ''
+  };
 
   const animatePopUp = elem => {
 
@@ -92,6 +105,25 @@ const togglePopUp = () => {
 
   popupCheck.addEventListener('click', event => {
     hidePopUp(popupCheck, event);
+  });
+
+  director.addEventListener('click', event => {
+    event.preventDefault();
+    const target = event.target;
+    if (target.matches('.consultation-btn')) {
+      showPopUp(popupConsultation);
+    }
+  });
+  popupConsultation.addEventListener('click', event => {
+    const target = event.target;
+    if (target.classList.contains('capture-form-btn')) {
+      dataObj.userName = userName.value;
+      dataObj.phoneUser = phoneUser.value;
+      dataObj.question = inputMessage.value;
+      sendObj(dataObj);
+      popupConsultation.style.display = 'none';
+    }
+    hidePopUp(popupConsultation, event);
   });
 };
 

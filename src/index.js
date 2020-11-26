@@ -6,6 +6,7 @@ import accordion from './modules/accordion';
 import calc from './modules/calc';
 import sendForm from './modules/sendForms';
 import { form1, form2 } from './modules/sendForms';
+import sendObj from './modules/sendObj';
 
 //PopUp
 togglePopUp();
@@ -22,4 +23,7 @@ calc();
 //sendForms
 sendForm(form1);
 sendForm(form2);
+
+//sendObj
+sendObj();
 
