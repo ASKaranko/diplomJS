@@ -4,7 +4,8 @@ const togglePopUp = () => {
     popupCall = document.querySelector('.popup-call'),
     popupDiscount = document.querySelector('.popup-discount'),
     popupCheck = document.querySelector('.popup-check'),
-    sentenceSection = document.querySelector('.sentence');
+    sentenceSection = document.querySelector('.sentence'),
+    constructor = document.querySelector('.constructor');
 
   const animatePopUp = elem => {
 
@@ -67,6 +68,15 @@ const togglePopUp = () => {
     const target = event.target;
 
     if (target.classList.contains('sentence-btn')) {
+      showPopUp(popupDiscount);
+    }
+  });
+
+  constructor.addEventListener('click', event => {
+    event.preventDefault();
+    const target = event.target;
+
+    if (target.classList.contains('send')) {
       showPopUp(popupDiscount);
     }
   });
