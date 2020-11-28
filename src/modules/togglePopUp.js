@@ -131,18 +131,21 @@ const togglePopUp = () => {
     }
   });
 
-  popupDiscount.addEventListener('click', event => {
+  const handler = event => {
     const target = event.target;
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('#name_11') || target.matches('#phone_11')) {
         validation(target);
-      } else {
+      } else if (target.matches('.capture-form-btn')) {
         sendForm(popupDiscountForm);
       }
     } else {
       hidePopUp(popupDiscount, event);
     }
-  });
+  };
+
+  popupDiscount.addEventListener('click', handler);
+
 
   gaugingButton.addEventListener('click', event => {
     event.preventDefault();

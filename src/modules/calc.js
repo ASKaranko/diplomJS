@@ -1,5 +1,5 @@
 import sendObj from './sendObj';
-import togglePopUp from './togglePopUp';
+import validation from './togglePopUp';
 
 const calc = () => {
   const constructor = document.querySelector('.constructor'),
@@ -85,6 +85,24 @@ const calc = () => {
     }
   };
 
+  const handler = event => {
+    const target = event.target;
+    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
+      if (target.matches('#name_11') || target.matches('#phone_11')) {
+        validation(target);
+      }
+      if (target.matches('.capture-form-btn')) {
+        data.userName = userName.value;
+        data.phoneUser = phoneUser.value;
+        sendObj(data);
+        userName.value = '';
+        phoneUser.value = '';
+        popupDiscount.style.display = 'none';
+        popupDiscount.removeEventListener('click', handler);
+      }
+    }
+  };
+
   const changeStyle = target => {
     target = target.closest('.onoffswitch');
     const onoffswitchSwitch = target.querySelector('.onoffswitch-switch'),
@@ -128,6 +146,7 @@ const calc = () => {
           }
           if (i === 3) {
             data.distance = +collapseFourInput.value;
+            popupDiscount.addEventListener('click', handler);
           } else {
             i++;
             togglePanels(i);
@@ -152,6 +171,9 @@ const calc = () => {
       calcResult.value = Math.floor(countSum());
     }
   });
+
+
+
   constructor.addEventListener('change', event => {
     const target = event.target;
 
@@ -160,23 +182,6 @@ const calc = () => {
     }
     if (target === collapseFourInput) {
       data.distance = +collapseFourInput.value;
-    }
-  });
-  popupDiscount.addEventListener('click', event => {
-    const target = event.target;
-    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
-      if (target.matches('#name_11') || target.matches('#phone_11')) {
-        togglePopUp.validation(target);
-      }
-      if (target.matches('.capture-form-btn')) {
-        data.userName = userName.value;
-        data.phoneUser = phoneUser.value;
-        sendObj(data);
-        userName.value = '';
-        phoneUser.value = '';
-        data = {};
-        popupDiscount.style.display = 'none';
-      }
     }
   });
   calcResult.value = Math.floor(countSum());
