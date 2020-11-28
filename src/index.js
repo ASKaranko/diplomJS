@@ -7,6 +7,7 @@ import calc from './modules/calc';
 import sendForm from './modules/sendForms';
 import { form1, form2 } from './modules/sendForms';
 import sendObj from './modules/sendObj';
+import sendFormConc from './modules/sendFormconc';
 
 //PopUp
 togglePopUp();
@@ -25,5 +26,8 @@ sendForm(form1);
 sendForm(form2);
 
 //sendObj
-sendObj();
+// sendObj();
+
+//SendFormConc
+// sendFormConc();
 

@@ -1,5 +1,5 @@
 import sendObj from './sendObj';
-import sendForm from './sendForms';
+import sendFormConc from './sendFormconc';
 
 const togglePopUp = () => {
   const callBtnMain = document.querySelectorAll('.call-btn__main'),
@@ -105,8 +105,9 @@ const togglePopUp = () => {
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('#name_1') || target.matches('#phone_1')) {
         validation(target);
-      } else {
-        sendForm(popupCallForm);
+      } else if (target.matches('.capture-form-btn')) {
+        event.preventDefault();
+        sendFormConc(popupCallForm);
       }
     } else {
       hidePopUp(popupCall, event);
@@ -137,7 +138,8 @@ const togglePopUp = () => {
       if (target.matches('#name_11') || target.matches('#phone_11')) {
         validation(target);
       } else if (target.matches('.capture-form-btn')) {
-        sendForm(popupDiscountForm);
+        event.preventDefault();
+        sendFormConc(popupDiscountForm);
       }
     } else {
       hidePopUp(popupDiscount, event);
@@ -158,7 +160,8 @@ const togglePopUp = () => {
       if (target.matches('#name_12') || target.matches('#phone_12')) {
         validation(target);
       } else {
-        sendForm(popupCheckForm);
+        event.preventDefault();
+        sendFormConc(popupCheckForm);
       }
     } else {
       hidePopUp(popupCheck, event);
