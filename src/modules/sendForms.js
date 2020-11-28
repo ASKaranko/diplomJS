@@ -24,7 +24,7 @@ const sendForm = form => {
       item.addEventListener('input', () => {
         item.value = item.value.replace(/[^0-9+]/g, '');
         if (item.value.length > 12) {
-          item.value = item.value.slice(0, 11);
+          item.value = item.value.slice(0, 12);
         }
       });
     } else if (/^name/.test(item.id)) {
