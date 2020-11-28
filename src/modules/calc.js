@@ -88,9 +88,6 @@ const calc = () => {
   const handler = event => {
     const target = event.target;
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
-      if (target.matches('#name_11') || target.matches('#phone_11')) {
-        validation(target);
-      }
       if (target.matches('.capture-form-btn')) {
         data.userName = userName.value;
         data.phoneUser = phoneUser.value;
