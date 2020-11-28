@@ -1,4 +1,5 @@
 import sendObj from './sendObj';
+import sendForm from './sendForms';
 
 const togglePopUp = () => {
   const callBtnMain = document.querySelectorAll('.call-btn__main'),
@@ -12,7 +13,10 @@ const togglePopUp = () => {
     director = document.querySelector('.director'),
     userName = document.getElementById('name_13'),
     phoneUser = document.getElementById('phone_13'),
-    inputMessage = director.querySelector('input');
+    inputMessage = director.querySelector('input'),
+    popupCheckForm = document.getElementById('popup-check'),
+    popupCallForm = document.getElementById('popup-call'),
+    popupDiscountForm = document.getElementById('popup-discount');
 
   const dataObj = {
     question: '',
@@ -41,6 +45,25 @@ const togglePopUp = () => {
 
   };
 
+  const validation = item => {
+    if (/^phone/.test(item.className)) {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^0-9+]/g, '');
+        if (item.value.length > 12) {
+          item.value = item.value.slice(0, 11);
+        }
+      });
+    } else if (/^name/.test(item.id)) {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^а-я ]/gi, '');
+      });
+    } else if (/user_quest/.test(item.name)) {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^а-я \W]/gi, '');
+      });
+    }
+  };
+
   const showPopUp = elem => {
     elem.style.display = 'block';
     const elemContent = elem.querySelector('.popup-content');
@@ -51,10 +74,15 @@ const togglePopUp = () => {
   };
 
   const hidePopUp = (elem, event) => {
-    event.preventDefault();
     let target = event.target;
 
+    const elemInput = elem.querySelectorAll('input');
+    elemInput.forEach(item => {
+      item.value = '';
+    });
+
     if (target.classList.contains('popup-close')) {
+      event.preventDefault();
       elem.style.display = 'none';
     } else {
       target = target.closest('.popup-content');
@@ -73,7 +101,16 @@ const togglePopUp = () => {
   });
 
   popupCall.addEventListener('click', event => {
-    hidePopUp(popupCall, event);
+    const target = event.target;
+    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
+      if (target.matches('#name_1') || target.matches('#phone_1')) {
+        validation(target);
+      } else {
+        sendForm(popupCallForm);
+      }
+    } else {
+      hidePopUp(popupCall, event);
+    }
   });
 
   sentenceSection.addEventListener('click', event => {
@@ -95,7 +132,16 @@ const togglePopUp = () => {
   });
 
   popupDiscount.addEventListener('click', event => {
-    hidePopUp(popupDiscount, event);
+    const target = event.target;
+    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
+      if (target.matches('#name_11') || target.matches('#phone_11')) {
+        validation(target);
+      } else {
+        sendForm(popupDiscountForm);
+      }
+    } else {
+      hidePopUp(popupDiscount, event);
+    }
   });
 
   gaugingButton.addEventListener('click', event => {
@@ -104,7 +150,23 @@ const togglePopUp = () => {
   });
 
   popupCheck.addEventListener('click', event => {
-    hidePopUp(popupCheck, event);
+    const target = event.target;
+    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
+      if (target.matches('#name_12') || target.matches('#phone_12')) {
+        validation(target);
+      } else {
+        sendForm(popupCheckForm);
+      }
+    } else {
+      hidePopUp(popupCheck, event);
+    }
+  });
+
+  director.addEventListener('input', event => {
+    const target = event.target;
+    if (target.matches('.user_quest')) {
+      validation(target);
+    }
   });
 
   director.addEventListener('click', event => {
@@ -116,15 +178,25 @@ const togglePopUp = () => {
   });
   popupConsultation.addEventListener('click', event => {
     const target = event.target;
-    if (target.classList.contains('capture-form-btn')) {
-      dataObj.userName = userName.value;
-      dataObj.phoneUser = phoneUser.value;
-      dataObj.question = inputMessage.value;
-      sendObj(dataObj);
-      popupConsultation.style.display = 'none';
+    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
+      if (target.matches('#name_13') || target.matches('#phone_13')) {
+        validation(target);
+      }
+      if (target.classList.contains('capture-form-btn')) {
+        dataObj.userName = userName.value;
+        dataObj.phoneUser = phoneUser.value;
+        dataObj.question = inputMessage.value;
+        userName.value = '';
+        phoneUser.value = '';
+        inputMessage.value = '';
+        sendObj(dataObj);
+        popupConsultation.style.display = 'none';
+      }
+    } else {
+      hidePopUp(popupConsultation, event);
     }
-    hidePopUp(popupConsultation, event);
   });
+
 };
 
 export default togglePopUp;

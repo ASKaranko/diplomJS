@@ -1,3 +1,6 @@
+import sendObj from './sendObj';
+import togglePopUp from './togglePopUp';
+
 const calc = () => {
   const constructor = document.querySelector('.constructor'),
     questionPanels = document.querySelectorAll('.constructor .panel-heading'),
@@ -14,7 +17,7 @@ const calc = () => {
     userName = document.getElementById('name_11'),
     phoneUser = document.getElementById('phone_11');
 
-  const data = {
+  let data = {
     chamber: 1,
     bottom: 1,
     diam1: 1.4,
@@ -28,14 +31,6 @@ const calc = () => {
   };
   calcResult.value = data.total;
   let trigger = false;
-
-  const postData = data => fetch('./server.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  });
 
   const countSum = () => {
     data.diam1 = +diameterOne.value;
@@ -168,21 +163,20 @@ const calc = () => {
     }
   });
   popupDiscount.addEventListener('click', event => {
-    event.preventDefault();
     const target = event.target;
-
-    if (target.matches('.capture-form-btn')) {
-      data.userName = userName.value;
-      data.phoneUser = phoneUser.value;
-      postData(data)
-        .then(response => {
-          if (response.status !== 200) {
-            throw new Error('Server not found');
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
+      if (target.matches('#name_11') || target.matches('#phone_11')) {
+        togglePopUp.validation(target);
+      }
+      if (target.matches('.capture-form-btn')) {
+        data.userName = userName.value;
+        data.phoneUser = phoneUser.value;
+        sendObj(data);
+        userName.value = '';
+        phoneUser.value = '';
+        data = {};
+        popupDiscount.style.display = 'none';
+      }
     }
   });
   calcResult.value = Math.floor(countSum());

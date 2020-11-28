@@ -23,6 +23,9 @@ const sendForm = form => {
     if (/^phone/.test(item.className)) {
       item.addEventListener('input', () => {
         item.value = item.value.replace(/[^0-9+]/g, '');
+        if (item.value.length > 12) {
+          item.value = item.value.slice(0, 11);
+        }
       });
     } else if (/^name/.test(item.id)) {
       item.addEventListener('input', () => {
@@ -33,8 +36,10 @@ const sendForm = form => {
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    statusMessage.textContent = loadMessage;
-    form.appendChild(statusMessage);
+    statusMessage.innerHTML = loadMessage;
+    if (!form.querySelector('div')) {
+      form.appendChild(statusMessage);
+    }
     const formData = new FormData(form);
     const body = {};
     formData.forEach((item, i) => {
