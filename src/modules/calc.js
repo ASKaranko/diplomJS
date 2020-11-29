@@ -53,6 +53,7 @@ const calc = () => {
     ringOne.value = data.ringCount1;
     ringTwo.value = data.ringCount2;
     calcResult.value = data.total;
+    collapseFourInput.value = '';
     const onoffswitchSwitch1 = collapseOne.querySelector('.onoffswitch-switch'),
       onoffswitchInner1 = collapseOne.querySelector('.onoffswitch-inner'),
       onoffswitchSwitch3 = collapseThree.querySelector('.onoffswitch-switch'),

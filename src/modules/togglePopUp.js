@@ -11,8 +11,14 @@ const togglePopUp = () => {
     constructor = document.querySelector('.constructor'),
     popupConsultation = document.querySelector('.popup-consultation'),
     director = document.querySelector('.director'),
-    userName = document.getElementById('name_13'),
-    phoneUser = document.getElementById('phone_13'),
+    userName11 = document.getElementById('name_11'),
+    phoneUser11 = document.getElementById('phone_11'),
+    userName13 = document.getElementById('name_13'),
+    phoneUser13 = document.getElementById('phone_13'),
+    userName1 = document.getElementById('name_1'),
+    phoneUser1 = document.getElementById('phone_1'),
+    userName12 = document.getElementById('name_12'),
+    phoneUser12 = document.getElementById('phone_12'),
     inputMessage = director.querySelector('input'),
     popupCheckForm = document.getElementById('popup-check'),
     popupCallForm = document.getElementById('popup-call'),
@@ -106,8 +112,13 @@ const togglePopUp = () => {
       if (target.matches('#name_1') || target.matches('#phone_1')) {
         validation(target);
       } else if (target.matches('.capture-form-btn')) {
-        event.preventDefault();
-        sendFormConc(popupCallForm);
+        if (userName1.value !== '' && phoneUser1.value !== '' && phoneUser1.value.length === 12) {
+          event.preventDefault();
+          sendFormConc(popupCallForm);
+        } else {
+          event.preventDefault();
+          console.log(phoneUser1.value.length);
+        }
       }
     } else {
       hidePopUp(popupCall, event);
@@ -138,15 +149,19 @@ const togglePopUp = () => {
       if (target.matches('#name_11') || target.matches('#phone_11')) {
         validation(target);
       } else if (target.matches('.capture-form-btn')) {
-        event.preventDefault();
-        if (!localStorage.getItem('calc') && !localStorage.getItem('calcSent')) {
-          sendFormConc(popupDiscountForm);
-        } else if (localStorage.getItem('calc') && localStorage.getItem('calcSent')) {
-          sendFormConc(popupDiscountForm);
-          localStorage.removeItem('calcSent');
-          localStorage.removeItem('calc');
+        if (userName11.value !== '' && phoneUser11.value !== '' && phoneUser11.value.length === 12) {
+          event.preventDefault();
+          if (!localStorage.getItem('calc') && !localStorage.getItem('calcSent')) {
+            sendFormConc(popupDiscountForm);
+          } else if (localStorage.getItem('calc') && localStorage.getItem('calcSent')) {
+            sendFormConc(popupDiscountForm);
+            localStorage.removeItem('calcSent');
+            localStorage.removeItem('calc');
+          } else {
+            return;
+          }
         } else {
-          return;
+          event.preventDefault();
         }
       }
     } else {
@@ -168,8 +183,12 @@ const togglePopUp = () => {
       if (target.matches('#name_12') || target.matches('#phone_12')) {
         validation(target);
       } else {
-        event.preventDefault();
-        sendFormConc(popupCheckForm);
+        if (userName12.value !== '' && phoneUser12.value !== '' && phoneUser12.value.length === 12) {
+          event.preventDefault();
+          sendFormConc(popupCheckForm);
+        } else {
+          event.preventDefault();
+        }
       }
     } else {
       hidePopUp(popupCheck, event);
@@ -197,13 +216,17 @@ const togglePopUp = () => {
         validation(target);
       }
       if (target.classList.contains('capture-form-btn')) {
-        dataObj.userName = userName.value;
-        dataObj.phoneUser = phoneUser.value;
-        dataObj.question = inputMessage.value;
-        userName.value = '';
-        phoneUser.value = '';
-        inputMessage.value = '';
-        sendObj(dataObj);
+        if (userName13.value !== '' && phoneUser13.value !== '' && phoneUser13.value.length === 12) {
+          dataObj.userName = userName13.value;
+          dataObj.phoneUser = phoneUser13.value;
+          dataObj.question = inputMessage.value;
+          userName13.value = '';
+          phoneUser13.value = '';
+          inputMessage.value = '';
+          sendObj(dataObj);
+        } else {
+          event.preventDefault();
+        }
       }
     } else {
       hidePopUp(popupConsultation, event);

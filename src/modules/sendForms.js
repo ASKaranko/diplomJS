@@ -35,38 +35,43 @@ const sendForm = form => {
   });
 
   form.addEventListener('submit', event => {
-    event.preventDefault();
-    statusMessage.innerHTML = loadMessage;
-    if (!form.querySelector('div')) {
-      form.appendChild(statusMessage);
-    }
-    const formData = new FormData(form);
-    const body = {};
-    formData.forEach((item, i) => {
-      body[i] = item;
-    });
-
-    function clearMessage() {
-      statusMessage.remove();
-    }
-
-    postData(body)
-      .then(response => {
-        if (response.status !== 200) {
-          throw new Error('Server not found');
-        }
-        statusMessage.textContent = successMessage;
-        setTimeout(clearMessage, 3000);
-        formBodyArray.forEach(item => {
-          if (item.tagName.toLowerCase() !== 'button') {
-            item.value = '';
-          }
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        statusMessage.textContent = errorMessage;
+    const inputPhone = form.querySelector('.phone-user');
+    if (inputPhone.value.length === 12) {
+      event.preventDefault();
+      statusMessage.innerHTML = loadMessage;
+      if (!form.querySelector('div')) {
+        form.appendChild(statusMessage);
+      }
+      const formData = new FormData(form);
+      const body = {};
+      formData.forEach((item, i) => {
+        body[i] = item;
       });
+
+      function clearMessage() {
+        statusMessage.remove();
+      }
+
+      postData(body)
+        .then(response => {
+          if (response.status !== 200) {
+            throw new Error('Server not found');
+          }
+          statusMessage.textContent = successMessage;
+          setTimeout(clearMessage, 3000);
+          formBodyArray.forEach(item => {
+            if (item.tagName.toLowerCase() !== 'button') {
+              item.value = '';
+            }
+          });
+        })
+        .catch(error => {
+          console.error(error);
+          statusMessage.textContent = errorMessage;
+        });
+    } else {
+      event.preventDefault();
+    }
   });
 
 };
