@@ -124,7 +124,7 @@ const calc = () => {
     const target = event.target;
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('.capture-form-btn')) {
-        if (userName.value !== '' && phoneUser.value !== '') {
+        if (userName.value !== '' && phoneUser.value !== '' && phoneUser.value === 12) {
           data.userName = userName.value;
           data.phoneUser = phoneUser.value;
           sendObj(data);
