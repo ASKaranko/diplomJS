@@ -10,6 +10,7 @@ const togglePopUp = () => {
     sentenceSection = document.querySelector('.sentence'),
     constructor = document.querySelector('.constructor'),
     popupConsultation = document.querySelector('.popup-consultation'),
+    popupConsultationForm = document.querySelector('.popup-consultation .capture-form'),
     director = document.querySelector('.director'),
     userName11 = document.getElementById('name_11'),
     phoneUser11 = document.getElementById('phone_11'),
@@ -107,6 +108,10 @@ const togglePopUp = () => {
     });
   });
 
+  const errorPhone = document.createElement('div');
+  errorPhone.style.cssText = 'font-size: 1rem; color: red';
+  errorPhone.innerHTML = 'Номер должен состоять из + и 11 цифр';
+
   popupCall.addEventListener('click', event => {
     const target = event.target;
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
@@ -115,10 +120,13 @@ const togglePopUp = () => {
       } else if (target.matches('.capture-form-btn')) {
         if (userName1.value !== '' && phoneUser1.value !== '' && phoneUser1.value.length === 12) {
           event.preventDefault();
+          errorPhone.remove();
           sendFormConc(popupCallForm);
+        } else if (phoneUser1.value.length < 12) {
+          event.preventDefault();
+          popupCallForm.appendChild(errorPhone);
         } else {
           event.preventDefault();
-          console.log(phoneUser1.value.length);
         }
       }
     } else {
@@ -151,6 +159,7 @@ const togglePopUp = () => {
         validation(target);
       } else if (target.matches('.capture-form-btn')) {
         if (userName11.value !== '' && phoneUser11.value !== '' && phoneInputUser1.value.length === 12) {
+          errorPhone.remove();
           event.preventDefault();
           if (!localStorage.getItem('calc') && !localStorage.getItem('calcSent')) {
             sendFormConc(popupDiscountForm);
@@ -161,6 +170,9 @@ const togglePopUp = () => {
           } else {
             return;
           }
+        } else if (phoneUser11.value.length < 12) {
+          event.preventDefault();
+          popupDiscountForm.appendChild(errorPhone);
         } else {
           event.preventDefault();
         }
@@ -185,8 +197,12 @@ const togglePopUp = () => {
         validation(target);
       } else {
         if (userName12.value !== '' && phoneUser12.value !== '' && phoneUser12.value.length === 12) {
+          errorPhone.remove();
           event.preventDefault();
           sendFormConc(popupCheckForm);
+        } else if (phoneUser11.value.length < 12) {
+          event.preventDefault();
+          popupCheckForm.appendChild(errorPhone);
         } else {
           event.preventDefault();
         }
@@ -218,6 +234,7 @@ const togglePopUp = () => {
       }
       if (target.classList.contains('capture-form-btn')) {
         if (userName13.value !== '' && phoneUser13.value !== '' && phoneUser13.value.length === 12) {
+          errorPhone.remove();
           event.preventDefault();
           dataObj.userName = userName13.value;
           dataObj.phoneUser = phoneUser13.value;
@@ -226,6 +243,9 @@ const togglePopUp = () => {
           phoneUser13.value = '';
           inputMessage.value = '';
           sendObj(dataObj);
+        } else if (phoneUser11.value.length < 12) {
+          event.preventDefault();
+          popupConsultationForm.appendChild(errorPhone);
         } else {
           event.preventDefault();
         }
