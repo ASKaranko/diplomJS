@@ -139,7 +139,15 @@ const togglePopUp = () => {
         validation(target);
       } else if (target.matches('.capture-form-btn')) {
         event.preventDefault();
-        sendFormConc(popupDiscountForm);
+        if (!localStorage.getItem('calc') && !localStorage.getItem('calcSent')) {
+          sendFormConc(popupDiscountForm);
+        } else if (localStorage.getItem('calc') && localStorage.getItem('calcSent')) {
+          sendFormConc(popupDiscountForm);
+          localStorage.removeItem('calcSent');
+          localStorage.removeItem('calc');
+        } else {
+          popupDiscount.style.display = 'none';
+        }
       }
     } else {
       hidePopUp(popupDiscount, event);

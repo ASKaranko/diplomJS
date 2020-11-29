@@ -24,10 +24,3 @@ calc();
 //sendForms
 sendForm(form1);
 sendForm(form2);
-
-//sendObj
-// sendObj();
-
-//SendFormConc
-// sendFormConc();
-

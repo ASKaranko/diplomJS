@@ -17,7 +17,7 @@ const calc = () => {
     userName = document.getElementById('name_11'),
     phoneUser = document.getElementById('phone_11');
 
-  let data = {
+  const data = {
     chamber: 1,
     bottom: 1,
     diam1: 1.4,
@@ -94,9 +94,12 @@ const calc = () => {
         sendObj(data);
         userName.value = '';
         phoneUser.value = '';
+        localStorage.setItem('calcSent', 1);
         popupDiscount.style.display = 'none';
         popupDiscount.removeEventListener('click', handler);
       }
+    } else {
+      localStorage.removeItem('calc');
     }
   };
 
@@ -143,6 +146,7 @@ const calc = () => {
           }
           if (i === 3) {
             data.distance = +collapseFourInput.value;
+            localStorage.setItem('calc', 1);
             popupDiscount.addEventListener('click', handler);
           } else {
             i++;
@@ -182,6 +186,6 @@ const calc = () => {
     }
   });
   calcResult.value = Math.floor(countSum());
-};
 
+};
 export default calc;
