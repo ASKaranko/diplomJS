@@ -19,6 +19,10 @@ const sendForm = form => {
     body: JSON.stringify(body)
   });
 
+  const errorPhone = document.createElement('div');
+  errorPhone.style.cssText = 'font-size: 1rem; color: red';
+  errorPhone.innerHTML = 'Номер должен состоять из + и 11 цифр';
+
   formBodyArray.forEach(item => {
     if (/^phone/.test(item.className)) {
       item.addEventListener('input', () => {
@@ -37,6 +41,7 @@ const sendForm = form => {
   form.addEventListener('submit', event => {
     const inputPhone = form.querySelector('.phone-user');
     if (inputPhone.value.length === 12) {
+      errorPhone.remove();
       event.preventDefault();
       statusMessage.innerHTML = loadMessage;
       if (!form.querySelector('div')) {
@@ -69,6 +74,9 @@ const sendForm = form => {
           console.error(error);
           statusMessage.textContent = errorMessage;
         });
+    } else if (inputPhone.value.length < 12) {
+      event.preventDefault();
+      form.appendChild(errorPhone);
     } else {
       event.preventDefault();
     }

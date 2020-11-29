@@ -200,7 +200,7 @@ const togglePopUp = () => {
           errorPhone.remove();
           event.preventDefault();
           sendFormConc(popupCheckForm);
-        } else if (phoneUser11.value.length < 12) {
+        } else if (phoneUser12.value.length < 12) {
           event.preventDefault();
           popupCheckForm.appendChild(errorPhone);
         } else {
@@ -243,7 +243,7 @@ const togglePopUp = () => {
           phoneUser13.value = '';
           inputMessage.value = '';
           sendObj(dataObj);
-        } else if (phoneUser11.value.length < 12) {
+        } else if (phoneUser13.value.length < 12) {
           event.preventDefault();
           popupConsultationForm.appendChild(errorPhone);
         } else {
