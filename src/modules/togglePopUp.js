@@ -211,12 +211,13 @@ const togglePopUp = () => {
   });
   popupConsultation.addEventListener('click', event => {
     const target = event.target;
+    const phoneInputUser = popupConsultation.querySelector('.phone-user');
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('#name_13') || target.matches('#phone_13')) {
         validation(target);
       }
       if (target.classList.contains('capture-form-btn')) {
-        if (userName13.value !== '' && phoneUser13.value !== '' && phoneUser13.value.length === 12) {
+        if (userName13.value !== '' && phoneUser13.value !== '' && phoneInputUser === 12) {
           event.preventDefault();
           dataObj.userName = userName13.value;
           dataObj.phoneUser = phoneUser13.value;

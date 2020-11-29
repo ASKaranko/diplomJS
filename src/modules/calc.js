@@ -18,7 +18,8 @@ const calc = () => {
     phoneUser = document.getElementById('phone_11'),
     collapseOne = document.querySelector('#collapseOne'),
     collapseThree = document.querySelector('#collapseThree'),
-    popupDiscountContent = document.querySelector('.popup-discount .popup-content');
+    popupDiscountContent = document.querySelector('.popup-discount .popup-content'),
+    popupConsultation = document.querySelector('.popup-consultation');
 
   let data = {
     chamber: 1,
@@ -121,10 +122,11 @@ const calc = () => {
   };
 
   const handler = event => {
+    const phoneInputUser = popupConsultation.querySelector('.phone-user');
     const target = event.target;
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('.capture-form-btn')) {
-        if (userName.value !== '' && phoneUser.value !== '' && phoneUser.value === 12) {
+        if (userName.value !== '' && phoneUser.value !== '' && phoneInputUser === 12) {
           data.userName = userName.value;
           data.phoneUser = phoneUser.value;
           sendObj(data);
