@@ -22,7 +22,8 @@ const togglePopUp = () => {
     inputMessage = director.querySelector('input'),
     popupCheckForm = document.getElementById('popup-check'),
     popupCallForm = document.getElementById('popup-call'),
-    popupDiscountForm = document.getElementById('popup-discount');
+    popupDiscountForm = document.getElementById('popup-discount'),
+    phoneInputUser1 = popupDiscount.querySelector('.phone-user');
 
   const dataObj = {
     question: '',
@@ -149,7 +150,7 @@ const togglePopUp = () => {
       if (target.matches('#name_11') || target.matches('#phone_11')) {
         validation(target);
       } else if (target.matches('.capture-form-btn')) {
-        if (userName11.value !== '' && phoneUser11.value !== '' && phoneUser11.value.length === 12) {
+        if (userName11.value !== '' && phoneUser11.value !== '' && phoneInputUser1.value.length === 12) {
           event.preventDefault();
           if (!localStorage.getItem('calc') && !localStorage.getItem('calcSent')) {
             sendFormConc(popupDiscountForm);
@@ -211,13 +212,12 @@ const togglePopUp = () => {
   });
   popupConsultation.addEventListener('click', event => {
     const target = event.target;
-    const phoneInputUser = popupConsultation.querySelector('.phone-user');
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('#name_13') || target.matches('#phone_13')) {
         validation(target);
       }
       if (target.classList.contains('capture-form-btn')) {
-        if (userName13.value !== '' && phoneUser13.value !== '' && phoneInputUser === 12) {
+        if (userName13.value !== '' && phoneUser13.value !== '' && phoneUser13.value === 12) {
           event.preventDefault();
           dataObj.userName = userName13.value;
           dataObj.phoneUser = phoneUser13.value;
