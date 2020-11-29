@@ -146,7 +146,7 @@ const togglePopUp = () => {
           localStorage.removeItem('calcSent');
           localStorage.removeItem('calc');
         } else {
-          popupDiscount.style.display = 'none';
+          return;
         }
       }
     } else {
@@ -204,7 +204,6 @@ const togglePopUp = () => {
         phoneUser.value = '';
         inputMessage.value = '';
         sendObj(dataObj);
-        popupConsultation.style.display = 'none';
       }
     } else {
       hidePopUp(popupConsultation, event);

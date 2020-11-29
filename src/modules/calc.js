@@ -15,9 +15,12 @@ const calc = () => {
     collapseFourInput = document.querySelector('#collapseFour input'),
     popupDiscount = document.querySelector('.popup-discount'),
     userName = document.getElementById('name_11'),
-    phoneUser = document.getElementById('phone_11');
+    phoneUser = document.getElementById('phone_11'),
+    collapseOne = document.querySelector('#collapseOne'),
+    collapseThree = document.querySelector('#collapseThree'),
+    popupDiscountContent = document.querySelector('.popup-discount .popup-content');
 
-  const data = {
+  let data = {
     chamber: 1,
     bottom: 1,
     diam1: 1.4,
@@ -31,6 +34,37 @@ const calc = () => {
   };
   calcResult.value = data.total;
   let trigger = false;
+
+  const reset = () => {
+    data = {
+      chamber: 1,
+      bottom: 1,
+      diam1: 1.4,
+      diam2: 1.4,
+      ringCount1: 1,
+      ringCount2: 1,
+      total: 10000,
+      distance: 0,
+      userName: '',
+      phoneUser: ''
+    };
+    diameterOne.value = data.diam1;
+    diameterTwo.value = data.diam2;
+    ringOne.value = data.ringCount1;
+    ringTwo.value = data.ringCount2;
+    calcResult.value = data.total;
+    const onoffswitchSwitch1 = collapseOne.querySelector('.onoffswitch-switch'),
+      onoffswitchInner1 = collapseOne.querySelector('.onoffswitch-inner'),
+      onoffswitchSwitch3 = collapseThree.querySelector('.onoffswitch-switch'),
+      onoffswitchInner3 = collapseThree.querySelector('.onoffswitch-inner');
+
+    onoffswitchSwitch1.style.left = '';
+    onoffswitchSwitch1.style.backgroundColor = '#93c706';
+    onoffswitchInner1.style.marginLeft = '0';
+    onoffswitchSwitch3.style.left = '';
+    onoffswitchSwitch3.style.backgroundColor = '#93c706';
+    onoffswitchInner3.style.marginLeft = '0';
+  };
 
   const countSum = () => {
     data.diam1 = +diameterOne.value;
@@ -89,17 +123,30 @@ const calc = () => {
     const target = event.target;
     if (!target.classList.contains('popup-close') && target.closest('.popup-content')) {
       if (target.matches('.capture-form-btn')) {
-        data.userName = userName.value;
-        data.phoneUser = phoneUser.value;
-        sendObj(data);
-        userName.value = '';
-        phoneUser.value = '';
-        localStorage.setItem('calcSent', 1);
-        popupDiscount.style.display = 'none';
-        popupDiscount.removeEventListener('click', handler);
+        if (userName.value !== '' && phoneUser.value !== '') {
+          data.userName = userName.value;
+          data.phoneUser = phoneUser.value;
+          sendObj(data);
+          userName.value = '';
+          phoneUser.value = '';
+          reset();
+          localStorage.setItem('calcSent', 1);
+          localStorage.setItem('calc', 1);
+          popupDiscount.removeEventListener('click', handler);
+        } else {
+          const statusMessage1 = document.createElement('div');
+          statusMessage1.style.cssText = 'font-size: 2rem; color: #85be32';
+          statusMessage1.innerHTML = 'Пожалуйста, заполните все поля';
+          popupDiscountContent.appendChild(statusMessage1);
+          setTimeout(() => {
+            statusMessage1.remove();
+          }, 3000);
+          popupDiscount.addEventListener('click', handler);
+        }
       }
     } else {
       localStorage.removeItem('calc');
+      localStorage.removeItem('calcSent', 1);
     }
   };
 
