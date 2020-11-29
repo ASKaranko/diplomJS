@@ -65,6 +65,11 @@ const calc = () => {
     onoffswitchSwitch3.style.left = '';
     onoffswitchSwitch3.style.backgroundColor = '#93c706';
     onoffswitchInner3.style.marginLeft = '0';
+    collapseTwoDivs.forEach((item, index) => {
+      if (index >= 3) {
+        collapseTwoDivs[index].style.display = 'none';
+      }
+    });
   };
 
   const countSum = () => {
