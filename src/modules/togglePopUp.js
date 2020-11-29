@@ -217,6 +217,7 @@ const togglePopUp = () => {
       }
       if (target.classList.contains('capture-form-btn')) {
         if (userName13.value !== '' && phoneUser13.value !== '' && phoneUser13.value.length === 12) {
+          event.preventDefault();
           dataObj.userName = userName13.value;
           dataObj.phoneUser = phoneUser13.value;
           dataObj.question = inputMessage.value;
